@@ -6,21 +6,60 @@ import { Button } from 'src/assets/styles/utils';
 import { SocialButton } from 'src/components/SocialButton/SocialButton';
 import Facebook from '../../../assets/imgs/facebook.svg';
 import Google from '../../../assets/imgs/google.svg';
-
-const isValidNumber = number => {
-  return number.length === 10;
-};
+import { useForm, Controller } from 'react-hook-form';
+import { rules } from '../../../constants/rules';
+import ErrorMessage from 'src/components/ErrorMessage/ErrorMessage';
 
 export default function Register() {
+  const {
+    handleSubmit,
+    getValues,
+    control,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  });
+
+  const handleRegister = data => {
+    console.log('asdasds');
+    console.log(data);
+  };
+
+  console.log(errors);
+
   return (
     <AuthLayout title="Bạn cần giúp đỡ?">
       <S.Body>
         <div className="container">
           <S.MainSection>
-            <S.Form>
+            <S.Form noValidate onSubmit={handleSubmit(handleRegister)}>
               <S.FormTitle>Đăng ký</S.FormTitle>
               <S.FormInput>
-                <InputText placeholder="Số điện thoại" type="text" name="phone" />
+                <Controller
+                  name="email"
+                  control={control}
+                  rules={rules.email}
+                  render={({ field }) => (
+                    <InputText placeholder="Email" type="text" name="email" onChange={field.onChange} />
+                  )}
+                  value={getValues('email')}
+                />
+
+                <ErrorMessage errors={errors} name="email" />
+                <Controller
+                  name="password"
+                  control={control}
+                  rules={rules.password}
+                  render={({ field }) => (
+                    <InputText placeholder="Password" type="password" name="password" onChange={field.onChange} />
+                  )}
+                  value={getValues('password')}
+                />
+                <ErrorMessage errors={errors} name="password" />
+
               </S.FormInput>
               <S.FormButton>
                 <Button>Tiếp theo</Button>
