@@ -12,7 +12,11 @@ export default function Footer() {
               <S.InfoHeading>Chăm sóc khách hàng</S.InfoHeading>
               <S.TextInfo>
                 {textCSKH.map(text => {
-                  return <a href="">{text}</a>;
+                  return (
+                    <a key={text} href="">
+                      {text}
+                    </a>
+                  );
                 })}
               </S.TextInfo>
             </S.InfoSection>
@@ -21,7 +25,11 @@ export default function Footer() {
               <S.InfoHeading>Về Shoppe</S.InfoHeading>
               <S.TextInfo>
                 {aboutShoppe.map(text => {
-                  return <a href="">{text}</a>;
+                  return (
+                    <a key={text} href="">
+                      {text}
+                    </a>
+                  );
                 })}
               </S.TextInfo>
             </S.InfoSection>
@@ -79,21 +87,21 @@ export default function Footer() {
               <S.FollowSection>
                 <li>
                   <img
-                    class="_6ZyW8Y"
+                    className="_6ZyW8Y"
                     src="https://down-vn.img.susercontent.com/file/2277b37437aa470fd1c71127c6ff8eb5"
                   />
                   <a href="">Facebook</a>
                 </li>
                 <li>
                   <img
-                    class="_6ZyW8Y"
+                    className="_6ZyW8Y"
                     src="https://down-vn.img.susercontent.com/file/5973ebbc642ceee80a504a81203bfb91"
                   />
                   <a href="">Instagram</a>
                 </li>
                 <li>
                   <img
-                    class="_6ZyW8Y"
+                    className="_6ZyW8Y"
                     src="https://down-vn.img.susercontent.com/file/f4f86f1119712b553992a75493065d9a"
                   />
                   <a href="">Linkedin</a>

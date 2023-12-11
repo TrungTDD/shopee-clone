@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
   background-color: rgb(245, 132, 111);
+  background-color: '#F5846F';
   text-transform: uppercase;
   display: block;
   color: white;
