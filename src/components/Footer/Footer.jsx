@@ -33,40 +33,43 @@ export default function Footer() {
                   <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/a0a9062ebe19b45c1ae0506f16af5c16" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/38fd98e55806c3b2e4535c4e4a6c4c08" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/bc2a874caeee705449c164be385b796c" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/2c46b83d84111ddc32cfd3b5995d9281" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/5e3f0bee86058637ff23cfdf2e14ca09" alt="logo" />
                 </li>
               </S.ImgSection>
               <S.InfoHeading>Đơn vị vận chuyển</S.InfoHeading>
               <S.ImgSection>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img
+                    src="https://down-vn.img.susercontent.com/file/vn-50009109-159200e3e365de418aae52b840f24185"
+                    alt="logo"
+                  />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/d10b0ec09f0322f9201a4f3daf378ed2" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/77bf96a871418fbc21cc63dd39fb5f15" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/59270fb2f3fbb7cbc92fca3877edde3f" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/957f4eec32b963115f952835c779cd2c" alt="logo" />
                 </li>
                 <li>
-                  <img src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8" alt="logo" />
+                  <img src="https://down-vn.img.susercontent.com/file/0d349e22ca8d4337d11c9b134cf9fe63" alt="logo" />
                 </li>
               </S.ImgSection>
             </S.InfoSection>
@@ -84,16 +87,16 @@ export default function Footer() {
                 <li>
                   <img
                     class="_6ZyW8Y"
-                    src="https://down-vn.img.susercontent.com/file/2277b37437aa470fd1c71127c6ff8eb5"
+                    src="https://down-vn.img.susercontent.com/file/5973ebbc642ceee80a504a81203bfb91"
                   />
-                  <a href="">Facebook</a>
+                  <a href="">Instagram</a>
                 </li>
                 <li>
                   <img
                     class="_6ZyW8Y"
-                    src="https://down-vn.img.susercontent.com/file/2277b37437aa470fd1c71127c6ff8eb5"
+                    src="https://down-vn.img.susercontent.com/file/f4f86f1119712b553992a75493065d9a"
                   />
-                  <a href="">Facebook</a>
+                  <a href="">Linkedin</a>
                 </li>
               </S.FollowSection>
             </S.InfoSection>

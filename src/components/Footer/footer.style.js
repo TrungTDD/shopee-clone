@@ -36,11 +36,11 @@ export const ImgSection = styled.ul`
 
   li {
     display: inline-block;
-    padding: 0.2rem;
+    padding: 0.4rem;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     border-radius: 0.125rem;
-    width: 4.5rem;
-    height: 2rem;
+    width: 6rem;
+    height: 3rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
   }
@@ -66,10 +66,10 @@ export const FollowSection = styled.ul`
   a {
     color: rgba(0, 0, 0, 0.6);
     font-size: 1.2rem;
-  }
 
-  a:hover {
-    color: #ee4d2e;
+    &:hover {
+      color: #ee4d2e;
+    }
   }
 `;
 

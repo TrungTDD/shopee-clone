@@ -1,10 +1,6 @@
 import React from 'react';
-import Footer from 'src/components/Footer/Footer';
+import AuthLayout from 'src/layouts/AuthLayout';
 
 export default function Register() {
-  return (
-    <div>
-      <Footer />
-    </div>
-  );
+  return <AuthLayout title="Bạn cần giúp đỡ?">body layout</AuthLayout>;
 }
