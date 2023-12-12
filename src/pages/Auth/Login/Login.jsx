@@ -1,5 +1,6 @@
 import React from 'react';
+import AuthLayout from 'src/layouts/AuthLayout';
 
 export default function Login() {
-  return <div>Login</div>;
+  return <AuthLayout></AuthLayout>;
 }

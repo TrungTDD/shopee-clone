@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import AuthLayout from 'src/layouts/AuthLayout';
 import * as S from './Register.style';
 import InputText from 'src/components/InputText/InputText';
@@ -9,13 +10,19 @@ import Google from '../../../assets/imgs/google.svg';
 import { useForm, Controller } from 'react-hook-form';
 import { rules } from '../../../constants/rules';
 import ErrorMessage from 'src/components/ErrorMessage/ErrorMessage';
+import http from 'src/utils/http';
+import { register } from '../auth.slice';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
+import { path } from 'src/constants/path';
 
 export default function Register() {
   const {
     handleSubmit,
     getValues,
     control,
-    formState: { errors }
+    formState: { errors },
+    setError
   } = useForm({
     defaultValues: {
       email: '',
@@ -23,12 +30,30 @@ export default function Register() {
     }
   });
 
-  const handleRegister = data => {
-    console.log('asdasds');
-    console.log(data);
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  console.log(errors);
+  const handleRegister = async data => {
+    const body = {
+      email: data.email,
+      password: data.password
+    };
+
+    try {
+      const res = await dispatch(register(body));
+      unwrapResult(res); // need this one to unwrap the result
+      navigate(path.home);
+    } catch (error) {
+      if (error.status === 422) {
+        for (const key in error.data) {
+          setError(key, {
+            type: 'server',
+            message: error.data[key]
+          });
+        }
+      }
+    }
+  };
 
   return (
     <AuthLayout title="Bạn cần giúp đỡ?">
@@ -59,7 +84,6 @@ export default function Register() {
                   value={getValues('password')}
                 />
                 <ErrorMessage errors={errors} name="password" />
-
               </S.FormInput>
               <S.FormButton>
                 <Button>Tiếp theo</Button>
