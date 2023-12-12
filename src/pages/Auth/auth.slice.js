@@ -12,16 +12,30 @@ export const register = createAsyncThunk('auth/register', async (data, thunkApi)
   }
 });
 
+export const login = createAsyncThunk('auth/login', async (data, thunkApi) => {
+  try {
+    const res = await authApi.login(data);
+    return res;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error);
+  }
+});
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
     profile: { profile: localStorage.getItem(LocalStorage.user) || {} }
   },
   extraReducers: builder => {
-    builder.addCase(register.fulfilled, (state, action) => {
-      state.profile = action.payload;
-      localStorage.setItem(LocalStorage.user, JSON.stringify(state.profile));
-    });
+    builder
+      .addCase(register.fulfilled, (state, action) => {
+        state.profile = action.payload;
+        localStorage.setItem(LocalStorage.user, JSON.stringify(state.profile));
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.profile = action.payload;
+        localStorage.setItem(LocalStorage.user, JSON.stringify(state.profile));
+      });
   }
 });
 
