@@ -1,5 +1,5 @@
 const LocalStorage = {
-  use: 'user',
+  user: 'user',
   accessToken: 'accessToken',
   cart: 'cart'
 };

@@ -6,7 +6,7 @@ const authApi = {
   },
 
   login(data) {
-    return http.post('login', data)
+    return http.post('login', data);
   }
 };
 

@@ -21,22 +21,38 @@ export const login = createAsyncThunk('auth/login', async (data, thunkApi) => {
   }
 });
 
+function handleAuthFullfiled(state, action) {
+  const { user, access_token } = action.payload.data;
+  state.user = user;
+  state.accessToken = access_token;
+  localStorage.setItem(LocalStorage.user, JSON.stringify(state.user));
+  localStorage.setItem(LocalStorage.accessToken, access_token);
+}
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    profile: { profile: localStorage.getItem(LocalStorage.user) || {} }
+    user: localStorage.getItem(LocalStorage.user) || {},
+    accessToken: localStorage.getItem(LocalStorage.accessToken)
+  },
+  reducers: {
+    logout(state) {
+      state.user = {};
+      state.accessToken = undefined;
+      localStorage.removeItem(LocalStorage.user);
+      localStorage.removeItem(LocalStorage.accessToken);
+    }
   },
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        state.profile = action.payload;
-        localStorage.setItem(LocalStorage.user, JSON.stringify(state.profile));
+        handleAuthFullfiled(state, action);
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.profile = action.payload;
-        localStorage.setItem(LocalStorage.user, JSON.stringify(state.profile));
+        handleAuthFullfiled(state, action);
       });
   }
 });
 
 export const authReducer = authSlice.reducer;
+export const authActions = authSlice.actions;
