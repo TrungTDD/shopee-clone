@@ -5,11 +5,29 @@ import { path } from 'src/constants/path';
 import Login from './pages/Auth/Login/Login';
 import Register from './pages/Auth/Register/Register';
 import NotFound from './pages/NotFound/NotFound';
+import UnauthenticatedGuard from './guards/UnauthenticatedGuard';
+import User from './pages/User/User';
+import AuthenticatedGuard from './guards/AuthenticatedGuard';
 
 function App() {
   const router = createBrowserRouter([
     { path: path.home, element: <Home /> },
-    { path: path.login, element: <Login /> },
+    {
+      path: path.user,
+      element: (
+        <UnauthenticatedGuard>
+          <User />
+        </UnauthenticatedGuard>
+      )
+    },
+    {
+      path: path.login,
+      element: (
+        <AuthenticatedGuard>
+          <Login />
+        </AuthenticatedGuard>
+      )
+    },
     { path: path.register, element: <Register /> },
     { path: path.notFound, element: <NotFound /> }
   ]);

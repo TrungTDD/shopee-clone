@@ -9,6 +9,7 @@ import NavBar from '../NavBar/NavBar';
 
 export default function HeaderHome() {
   const isAuthenticated = useAuthenticated();
+  console.log(isAuthenticated);
 
   return (
     <S.Header>

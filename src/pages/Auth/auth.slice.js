@@ -7,7 +7,6 @@ export const register = createAsyncThunk('auth/register', async (data, thunkApi)
     const response = await authApi.register(data);
     return response;
   } catch (error) {
-    console.log(error);
     return thunkApi.rejectWithValue(error);
   }
 });
@@ -32,7 +31,7 @@ function handleAuthFullfiled(state, action) {
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: localStorage.getItem(LocalStorage.user) || {},
+    user: JSON.parse(localStorage.getItem(LocalStorage.user)) || {},
     accessToken: localStorage.getItem(LocalStorage.accessToken)
   },
   reducers: {
@@ -50,6 +49,10 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         handleAuthFullfiled(state, action);
+      })
+      .addCase(login.rejected, (state, action) => {
+        console.log(action.payload);
+        // handleAuthFullfiled(state, action);
       });
   }
 });

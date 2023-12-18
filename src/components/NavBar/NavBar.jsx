@@ -3,7 +3,6 @@ import usePopover from 'src/hooks/usePopover';
 import Popover from '../Popover/Popover';
 import { useDispatch } from 'react-redux';
 import { authActions } from 'src/pages/Auth/auth.slice';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function NavBar({ isAuthenticated }) {
   const { showPopover, handleShowPopover, handleHidePopover } = usePopover();
