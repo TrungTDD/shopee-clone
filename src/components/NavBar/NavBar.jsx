@@ -28,9 +28,7 @@ export default function NavBar({ isAuthenticated }) {
               <Popover showPopover={showPopover}>
                 <S.UserLink to="">Tài khoản của tôi</S.UserLink>
                 <S.UserLink to="">Đơn mua</S.UserLink>
-                <S.UserLink onClick={handleLogout} to="">
-                  Đăng xuất
-                </S.UserLink>
+                <S.UserLink onClick={handleLogout}>Đăng xuất</S.UserLink>
               </Popover>
             </S.User>
           ) : (

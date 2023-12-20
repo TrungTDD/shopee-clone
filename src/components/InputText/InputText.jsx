@@ -1,13 +1,12 @@
 import React from 'react';
 import * as S from './inputText.style';
-import { forwardRef } from 'react';
 
-export const InputText = forwardRef((props, ref) => {
+export const InputText = props => {
   return (
     <S.FormControl>
-      <input ref={ref} {...props}/>
+      <input {...props} />
     </S.FormControl>
   );
-});
+};
 
 export default InputText;
