@@ -19,3 +19,8 @@ export const Main = styled.main`
   flex: 0 0 85%;
   max-width: 85%;
 `;
+
+export const ProductItems = styled.main`
+  display: flex;
+  flex-wrap: wrap;
+`;

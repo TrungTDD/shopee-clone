@@ -45,7 +45,7 @@ export default function FilterPanel() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              dataSlot="icon"
+              dataslot="icon"
               className="w-6 h-6"
             >
               <path
