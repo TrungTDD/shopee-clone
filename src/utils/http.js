@@ -5,7 +5,7 @@ class Http {
   constructor() {
     this.instance = axios.create({
       baseURL: 'https://api-ecom.duthanhduoc.com',
-      timeout: 1000,
+      timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
       }
@@ -16,6 +16,7 @@ class Http {
         return result;
       },
       ({ response }) => {
+        console.log(response);
         const result = { ...response.data, status: response.status };
         return Promise.reject(result);
       }

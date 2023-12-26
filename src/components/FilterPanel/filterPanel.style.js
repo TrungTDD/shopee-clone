@@ -37,20 +37,17 @@ export const Categories = styled.ul`
   gap: 1.2rem;
 `;
 
-export const CategoryTitle = styled(NavLink)`
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 1.4rem;
-  a {
-    .active {
-      color: green;
-    }
-  }
+export const CategoryItem = styled.li`
   &:hover {
     color: red;
   }
-  &:active {
-    font-weight: 700;
-    color: #ee4d2d;
+
+  a {
+    color: rgba(0, 0, 0, 0.8);
+    &.active {
+      font-weight: 700;
+      color: #ee4d2d;
+    }
   }
 `;
 

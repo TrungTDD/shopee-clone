@@ -23,4 +23,11 @@ export const Main = styled.main`
 export const ProductItems = styled.main`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 3.6rem;
+`;
+
+export const PaginationSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

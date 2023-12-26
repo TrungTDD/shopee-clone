@@ -1,6 +1,22 @@
+import { path } from 'src/constants/path';
 import * as S from './filterPanel.style';
+import { useEffect, useState } from 'react';
+import categoriesApi from 'src/api/categories.api';
+import { NavLink, useLocation } from 'react-router-dom';
+import qs from 'query-string';
 
 export default function FilterPanel() {
+  const [categories, setCategories] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const categories = await categoriesApi.getCategories();
+      return categories.data;
+    };
+    fetchData().then(result => setCategories(result));
+  }, []);
+
   return (
     <>
       <S.AllCategories>
@@ -24,15 +40,24 @@ export default function FilterPanel() {
         </S.CategoryHeading>
 
         <S.Categories>
-          <li>
-            <S.CategoryTitle to="">Áo thun</S.CategoryTitle>
-          </li>
-          <li>
-            <S.CategoryTitle to="">Đồng hồ</S.CategoryTitle>
-          </li>
-          <li>
-            <S.CategoryTitle to="">Điện thoại</S.CategoryTitle>
-          </li>
+          {categories.map((value, index) => {
+            return (
+              <S.CategoryItem key={index}>
+                <NavLink
+                  to={path.home + `?category=${value._id}`}
+                  className={() => {
+                    const queryId = qs.parse(location.search);
+                    if (queryId.category === value._id) {
+                      return 'active';
+                    }
+                    return '';
+                  }}
+                >
+                  {value.name}
+                </NavLink>
+              </S.CategoryItem>
+            );
+          })}
         </S.Categories>
       </S.AllCategories>
 

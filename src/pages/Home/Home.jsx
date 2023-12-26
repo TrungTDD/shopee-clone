@@ -4,6 +4,7 @@ import * as S from './home.style';
 import FilterPanel from 'src/components/FilterPanel/FilterPanel';
 import SortPanel from 'src/components/SortPanel/SortPanel';
 import ProductItem from 'src/components/ProductItem/ProductItem';
+import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Home() {
   return (
@@ -19,7 +20,12 @@ export default function Home() {
             <ProductItem />
             <ProductItem />
             <ProductItem />
+            <ProductItem />
+            <ProductItem />
           </S.ProductItems>
+          <S.PaginationSection>
+            <Pagination />
+          </S.PaginationSection>
         </S.Main>
       </S.Container>
     </HomeLayout>
