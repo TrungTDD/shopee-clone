@@ -4,18 +4,20 @@ import { useEffect, useState } from 'react';
 import categoriesApi from 'src/api/categories.api';
 import { NavLink, useLocation } from 'react-router-dom';
 import qs from 'query-string';
+import { getCategories } from 'src/pages/Home/home.slice';
+import { useDispatch } from 'react-redux';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 export default function FilterPanel() {
+  const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const categories = await categoriesApi.getCategories();
-      return categories.data;
-    };
-    fetchData().then(result => setCategories(result));
-  }, []);
+    dispatch(getCategories())
+      .then(unwrapResult)
+      .then(result => setCategories(result.data));
+  }, [dispatch]);
 
   return (
     <>

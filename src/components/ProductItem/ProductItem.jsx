@@ -2,25 +2,27 @@ import React from 'react';
 import * as S from './productItem.style';
 import { Link } from 'react-router-dom';
 import ProductRating from '../ProductRating/ProductRating';
+import { path } from 'src/constants/path';
+import { generateNameId } from 'src/utils/helpes';
 
-export default function ProductItem() {
+export default function ProductItem({ id, image, name, originalPrice, discountPrice, rating, sold }) {
   return (
     <S.Product>
-      <Link to="">
+      <Link to={path.products + '/' + generateNameId(name, id)}>
         <S.ProductItem>
           <S.ProductImage>
-            <img alt="" src="https://down-vn.img.susercontent.com/file/dbedb6bd789d1d968cf36b6e19d2ec5e_tn" />
+            <img alt="" src={image} />
           </S.ProductImage>
           <S.ProductInfo>
-            <S.ProductTitle>FREESHIP ÁO KHOÁC BÒ CROTOP KAKI SIÊU CHẤT FORM THỤNG</S.ProductTitle>
+            <S.ProductTitle>{name}</S.ProductTitle>
             <S.ProductPriceSection>
-              <S.ProductOriginalPrice>đ 439.000</S.ProductOriginalPrice>
-              <S.ProductDiscountPrice>đ 239.000</S.ProductDiscountPrice>
+              <S.ProductOriginalPrice>đ {originalPrice}</S.ProductOriginalPrice>
+              <S.ProductDiscountPrice>đ {discountPrice}</S.ProductDiscountPrice>
             </S.ProductPriceSection>
             <S.ProductMetaInfo>
-              <ProductRating />
+              <ProductRating rating={rating} />
               <S.ProductSold>
-                <span>16.7k</span>
+                <span>{sold}k</span>
                 <span>Đã bán</span>
               </S.ProductSold>
             </S.ProductMetaInfo>
