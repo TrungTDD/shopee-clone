@@ -1,23 +1,70 @@
 import { path } from 'src/constants/path';
 import * as S from './filterPanel.style';
 import { useEffect, useState } from 'react';
-import categoriesApi from 'src/api/categories.api';
 import { NavLink, useLocation } from 'react-router-dom';
 import qs from 'query-string';
 import { getCategories } from 'src/pages/Home/home.slice';
 import { useDispatch } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
-export default function FilterPanel() {
+export default function FilterPanel({ filters }) {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const {
+    control,
+    reset,
+    getValues,
+    formState: { errors },
+    handleSubmit,
+    clearErrors
+  } = useForm({
+    defaultValues: {
+      maxPrice: filters.maxPrice || '',
+      minPrice: filters.minPrice || ''
+    },
+    reValidateMode: 'onSubmit'
+  });
 
   useEffect(() => {
     dispatch(getCategories())
       .then(unwrapResult)
       .then(result => setCategories(result.data));
   }, [dispatch]);
+
+  const handleFilterPrice = data => {
+    const { minPrice, maxPrice } = data;
+
+    const _filter = {
+      ...filters,
+      minPrice: minPrice,
+      maxPrice: maxPrice
+    };
+
+    const query = path.home + `?${qs.stringify(_filter)}`;
+    navigate(query);
+  };
+
+  const clearAll = () => {
+    reset();
+    navigate(path.home);
+  };
+
+  const validPrice = () => {
+    const minPrice = getValues('minPrice');
+    const maxPrice = getValues('maxPrice');
+    const message = 'Vui lòng điền khoản giá phù hợp';
+
+    if (minPrice !== '' && maxPrice !== '') {
+      return Number(minPrice) <= Number(maxPrice) || message;
+    }
+
+    return (minPrice !== '' && maxPrice !== '') || message;
+  };
 
   return (
     <>
@@ -87,19 +134,51 @@ export default function FilterPanel() {
 
         <S.FormFilterPrice>
           <S.FormTitle>Khoản giá</S.FormTitle>
-          <S.FormController>
+          <S.FormController onSubmit={handleSubmit(handleFilterPrice)}>
             <S.FormInput>
-              <S.FormInputPrice />
+              <Controller
+                name="minPrice"
+                control={control}
+                values={getValues('minPrice')}
+                rules={{ validate: validPrice }}
+                render={({ field }) => {
+                  return (
+                    <S.FormInputPrice
+                      onChange={value => {
+                        clearErrors();
+                        field.onChange(value);
+                      }}
+                      placeholder="Từ"
+                    />
+                  );
+                }}
+              />
+
               <S.FormLine />
-              <S.FormInputPrice />
+              <Controller
+                name="maxPrice"
+                control={control}
+                values={getValues('maxPrice')}
+                render={({ field }) => {
+                  return (
+                    <S.FormInputPrice
+                      onChange={value => {
+                        clearErrors();
+                        field.onChange(value);
+                      }}
+                      placeholder="Đến"
+                    />
+                  );
+                }}
+              />
             </S.FormInput>
-            <S.PriceErrorMessage>Vui lòng điền khoảng giá phù hợp</S.PriceErrorMessage>
+            <S.PriceErrorMessage>{errors.minPrice && errors.minPrice.message}</S.PriceErrorMessage>
             <S.FormButton>Áp dụng</S.FormButton>
           </S.FormController>
         </S.FormFilterPrice>
       </S.Filter>
 
-      <S.RemoverFilter>Xoá Tất Cả</S.RemoverFilter>
+      <S.RemoverFilter onClick={clearAll}>Xoá Tất Cả</S.RemoverFilter>
     </>
   );
 }

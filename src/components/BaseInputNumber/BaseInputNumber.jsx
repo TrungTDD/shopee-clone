@@ -7,5 +7,5 @@ export default function BaseInputNumber({ value, onChange, ...props }) {
     }
   };
 
-  return <input value={value} type="text" onChange={handleChange} {...props} />;
+  return <input value={value} type="number" onChange={handleChange} {...props} />;
 }

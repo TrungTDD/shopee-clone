@@ -1,7 +1,22 @@
 import React from 'react';
 import * as S from './pagination.style';
+import { useNavigate } from 'react-router-dom';
+import { path } from 'src/constants/path';
+import qs from 'query-string';
 
-export default function Pagination() {
+export default function Pagination({ filters }) {
+  const navigate = useNavigate();
+
+  const handleClickPage = page => {
+    const _filters = {
+      ...filters,
+      page: page
+    };
+
+    let query = path.home + `?${qs.stringify(_filters)}`;
+    navigate(query);
+  };
+
   return (
     <S.Pagination>
       <S.PrevButton>
@@ -17,11 +32,22 @@ export default function Pagination() {
           </g>
         </svg>
       </S.PrevButton>
-      <S.PageButton className="active">1</S.PageButton>
-      <S.PageButton>2</S.PageButton>
-      <S.PageButton>2</S.PageButton>
-      <S.PageButton>2</S.PageButton>
-      <S.PageButton>2</S.PageButton>
+      {Array(5)
+        .fill(0)
+        .map((value, index) => {
+          const page = index + 1;
+          const filterPage = filters.page;
+          return (
+            <S.PageButton
+              onClick={() => handleClickPage(page)}
+              className={page == filterPage ? 'active' : null}
+              key={index}
+            >
+              {page}
+            </S.PageButton>
+          );
+        })}
+
       <S.PageButton>...</S.PageButton>
       <S.NextButton>
         <svg

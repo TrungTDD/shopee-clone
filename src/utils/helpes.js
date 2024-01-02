@@ -3,9 +3,9 @@ export const isValidEmail = email => {
 };
 
 export const payloadCreator = api => {
-  return async (data, thunkApi) => {
+  return async (config, thunkApi) => {
     try {
-      const response = await api(data);
+      const response = await api(config);
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
