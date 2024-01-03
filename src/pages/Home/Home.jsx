@@ -12,7 +12,8 @@ import ProductList from 'src/components/ProductList/ProductList';
 import useQuery from 'src/hooks/useQuery';
 
 export default function Home() {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState({});
   const [filters, setFilters] = useState({});
   const queryString = useQuery();
   const dispatch = useDispatch();
@@ -21,7 +22,8 @@ export default function Home() {
     const _filter = {
       ...queryString,
       page: queryString.page || 1,
-      limit: queryString.limit || 30
+      limit: queryString.limit || 30,
+      sort_by: queryString.sort_by || 'view'
     };
 
     setFilters(_filter);
@@ -31,14 +33,16 @@ export default function Home() {
       limit: _filter.limit,
       category: _filter.category,
       price_max: _filter.maxPrice,
-      price_min: _filter.minPrice
+      price_min: _filter.minPrice,
+      sort_by: _filter.sort_by,
+      order: _filter.order
     };
 
-    console.log(params);
     dispatch(getProducts({ params }))
       .then(unwrapResult)
       .then(result => {
         setProducts(result.data.products);
+        setPagination(result.data.pagination);
       });
   }, [dispatch, queryString]);
 
@@ -49,10 +53,10 @@ export default function Home() {
           <FilterPanel filters={filters} />
         </S.Side>
         <S.Main>
-          <SortPanel />
+          <SortPanel filters={filters} pagination={pagination} />
           <ProductList products={products} />
           <S.PaginationSection>
-            <Pagination filters={filters} />
+            <Pagination pagination={pagination} filters={filters} />
           </S.PaginationSection>
         </S.Main>
       </S.Container>

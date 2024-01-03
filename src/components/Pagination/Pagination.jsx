@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { path } from 'src/constants/path';
 import qs from 'query-string';
 
-export default function Pagination({ filters }) {
+export default function Pagination({ filters, pagination }) {
   const navigate = useNavigate();
 
   const handleClickPage = page => {
