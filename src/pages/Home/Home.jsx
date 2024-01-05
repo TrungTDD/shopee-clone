@@ -35,7 +35,8 @@ export default function Home() {
       price_max: _filter.maxPrice,
       price_min: _filter.minPrice,
       sort_by: _filter.sort_by,
-      order: _filter.order
+      order: _filter.order,
+      name: _filter.name
     };
 
     dispatch(getProducts({ params }))

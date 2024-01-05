@@ -1,10 +1,32 @@
 import usePopover from 'src/hooks/usePopover';
 import * as S from './searchBar.style';
 import Popover from '../Popover/Popover';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import useQuery from 'src/hooks/useQuery';
+import { path } from 'src/constants/path';
 
 export default function SearchBar() {
   const { showPopover, handleShowPopover, handleHidePopover } = usePopover();
+  const [searchValue, setSearchValue] = useState('');
+  const navigate = useNavigate();
+  const queryString = useQuery();
+
+  useEffect(() => {
+    const name = queryString.name || '';
+    setSearchValue(name);
+  }, [queryString]);
+
+  const handleChangeSearchValue = event => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleSubmitSearch = event => {
+    event.preventDefault();
+    const query = path.home + `?name=${searchValue}`;
+    navigate(query);
+  };
+
   return (
     <>
       <S.SearchBar>
@@ -18,8 +40,8 @@ export default function SearchBar() {
           </Link>
         </S.Banner>
         <S.SearchSection>
-          <S.FormSearch>
-            <S.InputSearch />
+          <S.FormSearch onSubmit={handleSubmitSearch}>
+            <S.InputSearch onChange={event => handleChangeSearchValue(event)} value={searchValue} />
             <S.ButtonSearch>
               <svg height="19" viewBox="0 0 19 19" width="19" className="shopee-svg-icon">
                 <g fillRule="evenodd" stroke="none" strokeWidth="1">
