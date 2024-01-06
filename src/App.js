@@ -8,10 +8,12 @@ import NotFound from './pages/NotFound/NotFound';
 import UnauthenticatedGuard from './guards/UnauthenticatedGuard';
 import User from './pages/User/User';
 import AuthenticatedGuard from './guards/AuthenticatedGuard';
+import ProductDetail from './pages/ProductDetail/ProductDetai';
 
 function App() {
   const router = createBrowserRouter([
     { path: path.home, element: <Home /> },
+    { path: path.productDetail, element: <ProductDetail /> },
     {
       path: path.user,
       element: (

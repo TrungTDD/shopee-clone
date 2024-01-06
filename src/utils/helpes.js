@@ -16,3 +16,8 @@ export const payloadCreator = api => {
 export const generateNameId = (name, _id) => {
   return encodeURIComponent(`${name.replace(/\s/g, '-').replace(/%/g, '')}-i.${_id}`);
 };
+
+export const generateProductId = uri => {
+  const splitArray = uri.split('-i.');
+  return splitArray[splitArray.length - 1];
+};
