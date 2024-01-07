@@ -5,6 +5,7 @@ export const Container = styled.div`
 `;
 
 export const InputQuantity = styled.input`
+  -webkit-appearance: none;
   width: 6rem;
   border-radius: 0;
   border: 1px solid rgba(0, 0, 0, 0.1);

@@ -9,6 +9,8 @@ import UnauthenticatedGuard from './guards/UnauthenticatedGuard';
 import User from './pages/User/User';
 import AuthenticatedGuard from './guards/AuthenticatedGuard';
 import ProductDetail from './pages/ProductDetail/ProductDetai';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const router = createBrowserRouter([
@@ -33,7 +35,12 @@ function App() {
     { path: path.register, element: <Register /> },
     { path: path.notFound, element: <NotFound /> }
   ]);
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />;
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App;
