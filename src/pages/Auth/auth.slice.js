@@ -20,12 +20,19 @@ export const login = createAsyncThunk('auth/login', async (data, thunkApi) => {
   }
 });
 
-function handleAuthFullfiled(state, action) {
+function handleAuthFulfilled(state, action) {
   const { user, access_token } = action.payload.data;
   state.user = user;
   state.accessToken = access_token;
   localStorage.setItem(LocalStorage.user, JSON.stringify(state.user));
   localStorage.setItem(LocalStorage.accessToken, access_token);
+}
+
+function handleUnAuthorized(state) {
+  state.accessToken = {};
+  state.accessToken = undefined;
+  localStorage.removeItem(LocalStorage.user);
+  localStorage.removeItem(LocalStorage.accessToken);
 }
 
 const authSlice = createSlice({
@@ -36,23 +43,23 @@ const authSlice = createSlice({
   },
   reducers: {
     logout(state) {
-      state.user = {};
-      state.accessToken = undefined;
-      localStorage.removeItem(LocalStorage.user);
-      localStorage.removeItem(LocalStorage.accessToken);
+      handleUnAuthorized(state);
+    },
+
+    unauthorize(state) {
+      handleUnAuthorized(state);
     }
   },
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        handleAuthFullfiled(state, action);
+        handleAuthFulfilled(state, action);
       })
       .addCase(login.fulfilled, (state, action) => {
-        handleAuthFullfiled(state, action);
+        handleAuthFulfilled(state, action);
       })
       .addCase(login.rejected, (state, action) => {
-        console.log(action.payload);
-        // handleAuthFullfiled(state, action);
+        handleUnAuthorized(state);
       });
   }
 });
