@@ -92,3 +92,50 @@ export const CartBadge = styled.div`
   font-size: 1.2rem;
   color: rgba(250, 85, 51, 0.8);
 `;
+
+export const PopoverContent = styled.div`
+  width: 35rem;
+  padding: 1rem;
+`;
+
+export const ProductInfo = styled.div`
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  margin-top: 1.2rem;
+`;
+
+export const ProductImage = styled.div`
+  img {
+    width: 40px;
+  }
+`;
+
+export const ProductTitle = styled.div`
+  font-size: 1.2rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+`;
+
+export const ProductPrice = styled.div``;
+
+export const PopoverFooter = styled.div`
+  margin-top: 2.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const CartStatus = styled.div`
+  font-size: 1.2rem;
+`;
+
+export const CartButton = styled.button`
+  padding: 0.8rem 1.2rem;
+  background-color: #F05B33;
+  color: #fff;
+  border: transparent;
+  border-radius: 2px;
+`;

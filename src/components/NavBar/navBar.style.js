@@ -52,3 +52,7 @@ export const AuthLink = styled(Link)`
     color: rgba(0, 0, 0, 0.5);
   }
 `;
+
+export const PopoverContner = styled.div`
+  width: 15rem;
+`;

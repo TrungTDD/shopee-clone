@@ -21,7 +21,6 @@ export const Drawer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
   top: 100%;
   right: 0;
-  width: 15rem;
   :before {
     position: absolute;
     top: -40px;

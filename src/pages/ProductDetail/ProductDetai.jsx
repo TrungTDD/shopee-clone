@@ -9,8 +9,8 @@ import { generateProductId } from 'src/utils/helpes';
 import ProductRating from 'src/components/ProductRating/ProductRating';
 import AddRemoveProduct from 'src/components/AddRemoveProduct/AddRemoveProduct';
 import ProductSliderImages from 'src/components/ProductSliderImage/ProductSliderImages';
-import purchaseApi from 'src/api/purchase.api';
 import { toast } from 'react-toastify';
+import { getPurchases } from 'src/components/SearchBar/cart.slice';
 
 export default function ProductDetail() {
   const dispatch = useDispatch();
@@ -33,13 +33,11 @@ export default function ProductDetail() {
     setQuantity(quantity);
   };
 
-  const handleAddToCart = event => {
-    event.preventDefault();
+  const handleAddToCart = () => {
     const body = {
       product_id: product._id,
       buy_count: quantity
     };
-    console.log(body);
     dispatch(addToCart(body))
       .then(unwrapResult)
       .then(res => {
@@ -47,6 +45,7 @@ export default function ProductDetail() {
           position: 'top-center',
           autoClose: 4000
         });
+        dispatch(getPurchases()).then(unwrapResult);
       })
       .catch(err => {
         toast.error(err.message, {

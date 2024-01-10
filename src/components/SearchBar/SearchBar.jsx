@@ -5,10 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useQuery from 'src/hooks/useQuery';
 import { path } from 'src/constants/path';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPurchases } from './cart.slice';
 
 export default function SearchBar() {
   const { showPopover, handleShowPopover, handleHidePopover } = usePopover();
   const [searchValue, setSearchValue] = useState('');
+  const dispatch = useDispatch();
+  const cartProducts = useSelector(state => state.cart.products);
   const navigate = useNavigate();
   const queryString = useQuery();
 
@@ -67,8 +71,8 @@ export default function SearchBar() {
             <span>Dép 0đ</span>
           </S.Recommend>
         </S.SearchSection>
-        <S.Cart onMouseEnter={handleShowPopover} onMouseLeave={handleHidePopover}>
-          <S.CartContainer>
+        <S.Cart>
+          <S.CartContainer onMouseEnter={handleShowPopover} onMouseLeave={handleHidePopover}>
             <S.CartIcon>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"></path>
@@ -76,8 +80,27 @@ export default function SearchBar() {
                 <circle cx="17.5" cy="19.5" r="1.5"></circle>
               </svg>
             </S.CartIcon>
-            <S.CartBadge>5</S.CartBadge>
-            <Popover showPopover={showPopover}>asdasd</Popover>
+            <S.CartBadge>{cartProducts.length}</S.CartBadge>
+            <Popover showPopover={showPopover}>
+              <S.PopoverContent>
+                {cartProducts &&
+                  cartProducts.map((product, idx) => {
+                    return (
+                      <S.ProductInfo key={idx}>
+                        <S.ProductImage>
+                          <img alt="" src={product.product.image} />
+                        </S.ProductImage>
+                        <S.ProductTitle>{product.product.name}</S.ProductTitle>
+                        <S.ProductPrice>đ{product.product.price}</S.ProductPrice>
+                      </S.ProductInfo>
+                    );
+                  })}
+                <S.PopoverFooter>
+                  <S.CartStatus>{cartProducts.length} Sản phẩm trong giỏ hàng</S.CartStatus>
+                  <S.CartButton>Xem giỏ hàng</S.CartButton>
+                </S.PopoverFooter>
+              </S.PopoverContent>
+            </Popover>
           </S.CartContainer>
         </S.Cart>
       </S.SearchBar>

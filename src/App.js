@@ -14,12 +14,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { authActions } from './pages/Auth/auth.slice';
+import useAuthenticated from './hooks/useAuthenticated';
+import { getPurchases } from './components/SearchBar/cart.slice';
 
 function App() {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const authorizeStatus = useSelector(state => state.app.status);
+  const authenticated = useAuthenticated();
 
   useEffect(() => {
     if (authorizeStatus === 401) {
@@ -27,6 +29,14 @@ function App() {
       navigate(path.login);
     }
   }, [authorizeStatus, dispatch, navigate]);
+
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(getPurchases());
+    } else {
+      
+    }
+  }, [dispatch, authenticated]);
 
   return (
     <>
