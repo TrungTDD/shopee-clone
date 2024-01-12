@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { authActions } from './pages/Auth/auth.slice';
 import useAuthenticated from './hooks/useAuthenticated';
 import { getPurchases } from './components/SearchBar/cart.slice';
+import Cart from './pages/Cart/Cart';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,6 @@ function App() {
     if (authenticated) {
       dispatch(getPurchases());
     } else {
-      
     }
   }, [dispatch, authenticated]);
 
@@ -59,6 +59,7 @@ function App() {
             </AuthenticatedGuard>
           }
         />
+        <Route path={path.cart} element={<Cart />} />
         <Route path={path.register} element={<Register />} />
         <Route path={path.notFound} element={<NotFound />} />
       </Routes>

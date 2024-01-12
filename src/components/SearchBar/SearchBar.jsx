@@ -5,13 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useQuery from 'src/hooks/useQuery';
 import { path } from 'src/constants/path';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPurchases } from './cart.slice';
+import { useSelector } from 'react-redux';
 
 export default function SearchBar() {
   const { showPopover, handleShowPopover, handleHidePopover } = usePopover();
   const [searchValue, setSearchValue] = useState('');
-  const dispatch = useDispatch();
   const cartProducts = useSelector(state => state.cart.products);
   const navigate = useNavigate();
   const queryString = useQuery();
